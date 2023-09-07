@@ -1,8 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import * as _dayjs from "dayjs";
-import isBetween from "dayjs/plugin/isBetween";
+import { isBetween } from "./isBetween";
 const dayjs = _dayjs;
-dayjs.extend(isBetween);
 
 export const fetchQuote = async (symbol: string, apikey: string) => {
   try {
@@ -139,11 +138,7 @@ export const fetchCandles = async (
 
       if (res !== "D" && res !== "W" && res !== "M") {
         const fixedHours = sortedData.filter((candle) => {
-          return dayjs(candle.time).isBetween(
-            dayjs(candle.time).hour(8).minute(29),
-            dayjs(candle.time).hour(15).minute(0),
-            "minute"
-          );
+          return isBetween(candle.time);
         });
 
         sortedCandles = fixedHours.map((candle) => {
