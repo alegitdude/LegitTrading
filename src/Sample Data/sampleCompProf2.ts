@@ -1,0 +1,15 @@
+export const sampleCompProf2 = {
+  country: "US",
+  currency: "USD",
+  estimateCurrency: "USD",
+  exchange: "NASDAQ NMS - GLOBAL MARKET",
+  finnhubIndustry: "Technology",
+  ipo: "1980-12-12",
+  logo: "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/AAPL.svg",
+  marketCapitalization: 2778862.818185107,
+  name: "Apple Inc",
+  phone: "14089961010.0",
+  shareOutstanding: 15634.2,
+  ticker: "AAPL",
+  weburl: "https://www.apple.com/",
+};

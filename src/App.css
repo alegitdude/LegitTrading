@@ -1,0 +1,18 @@
+#root {
+  max-width: 1280px;
+  height: 100vh;
+  text-align: center;
+  margin: 0 auto;
+}
+body {
+  height: 110vh;
+  padding: 0;
+  margin: 0;
+  color: #ff000079;
+}
+/* input {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+} */

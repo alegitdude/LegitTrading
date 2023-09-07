@@ -1,0 +1,145 @@
+export const news =[
+    {
+        "category": "top news",
+        "datetime": 1692102600,
+        "headline": "Economic Report: New York Fed’s Empire State factory gauge falls back into negative territory in August",
+        "id": 7291091,
+        "image": "https://images.mktw.net/im-835358/social",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "The New York Fed’s Empire State business conditions index,  fell 20.1 points in August to negative 19, the regional Fed bank said Tuesday.",
+        "url": "https://www.marketwatch.com/story/new-york-feds-empire-state-factory-gauge-falls-back-into-negative-territory-in-august-56f5d47c"
+    },
+    {
+        "category": "top news",
+        "datetime": 1692101640,
+        "headline": ": Who is Alex Chriss? 5 things to know about the next CEO of PayPal.",
+        "id": 7291092,
+        "image": "https://images.mktw.net/im-835094/social",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "PayPal is entering a new chapter, with Alex Chriss set to take the reins of the digital payments giant next month.",
+        "url": "https://www.marketwatch.com/story/who-is-alex-chriss-5-things-to-know-about-the-next-ceo-of-paypal-c98b8c8"
+    },
+    {
+        "category": "top news",
+        "datetime": 1692097500,
+        "headline": "Peter Morici: Strict limits on AI would harm unionized actors and writers",
+        "id": 7291071,
+        "image": "https://images.mktw.net/im-776442/social",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "Actors and writers who allow more liberal use of their likenesses and creative work would thrive",
+        "url": "https://www.marketwatch.com/story/strict-limits-on-ai-would-harm-unionized-actors-and-writers-75a63f8e"
+    },
+    {
+        "category": "top news",
+        "datetime": 1692097260,
+        "headline": ": Home Depot’s earnings beat estimates, as company unveils $15 billion share buyback",
+        "id": 7291072,
+        "image": "https://images.mktw.net/im-835720/social",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "The home-improvement retailer's earnings were ahead of consensus and it backed its full-year guidance, which is for a decline in sales and earnings.",
+        "url": "https://www.marketwatch.com/story/home-depot-tops-q2-estimates-backs-guidance-and-unveils-15-billion-share-buyback-program-5be588ed"
+    },
+    {
+        "category": "top news",
+        "datetime": 1692096900,
+        "headline": "Need to Know: Fund managers are the least bearish in more than a year, says Bank of America, wiping out a buy signal.",
+        "id": 7291073,
+        "image": "https://images.mktw.net/im-835724/social",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "Pessimistic investors are turning over a new leaf, according to the latest Bank of America fund manager survey.",
+        "url": "https://www.marketwatch.com/story/fund-managers-are-the-least-bearish-in-more-than-a-year-says-bank-of-america-wiping-out-a-buy-signal-a22c92c4"
+    },
+    {
+        "category": "top news",
+        "datetime": 1692096300,
+        "headline": ": Jim Cramer says new Trump indictment, not weak China economic data, is reason for depressed sentiment",
+        "id": 7291074,
+        "image": "https://images.mktw.net/im-835713/social",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "The indictment of former U.S. President Donald Trump, and not the latest round of weak China economic data, is the reason for the weakness in stock futures on Tuesday, according to CNBC commentator Jim Cramer.",
+        "url": "https://www.marketwatch.com/story/jim-cramer-says-the-trump-indictment-not-china-data-is-reason-for-depressed-sentiment-3ee050e7"
+    },
+    {
+        "category": "top news",
+        "datetime": 1692096180,
+        "headline": "Futures Movers: Oil edges lower after weak China data",
+        "id": 7291075,
+        "image": "https://images.mktw.net/im-695727/social",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "Oil futures were modestly lower Tuesday morning, feeling pressure after another round of weak economic data out of China.",
+        "url": "https://www.marketwatch.com/story/oil-edges-lower-after-weak-china-data-93b8147b"
+    },
+    {
+        "category": "top news",
+        "datetime": 1692096120,
+        "headline": "Bond Report: Ten-year Treasury yields near highest since 2008 as traders eye retail sales data",
+        "id": 7291076,
+        "image": "https://mw3.wsj.net/mw5/content/logos/mw_logo_social.png",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "Bond yields rose , with benchmark Treasury yields flirting with their highest level since 2008, as investors await an update on U.S. retail sales.",
+        "url": "https://www.marketwatch.com/story/ten-year-treasury-yields-near-highest-since-2008-as-traders-eye-retail-sales-data-5824c263"
+    },
+    {
+        "category": "top news",
+        "datetime": 1692093360,
+        "headline": ": Russia hikes interest rates by 3.5 percentage points",
+        "id": 7291056,
+        "image": "https://images.mktw.net/im-835684/social",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "Responding to a rapidly deteriorating ruble, the Bank of Russia hiked its key interest rate on Tuesday by 3.5 percentage points to 12%.",
+        "url": "https://www.marketwatch.com/story/russia-hikes-interest-rates-by-3-5-percentage-points-1d1b03f5"
+    },
+    {
+        "category": "top news",
+        "datetime": 1692093240,
+        "headline": "Movers & Shakers: D.R. Horton and Lennar stock get boost from Buffett buying and other stocks on the move",
+        "id": 7291057,
+        "image": "https://images.mktw.net/im-835509/social",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "D.R. Horton, Lennar, Discover Financial Services and Getty Images are among the stocks in the spotlight.",
+        "url": "https://www.marketwatch.com/story/d-r-horton-and-lennar-stock-get-boost-from-buffett-buying-and-other-stocks-on-the-move-7b39a33c"
+    },
+    {
+        "category": "top news",
+        "datetime": 1692090900,
+        "headline": "Market Snapshot: U.S. stock futures slide as China growth angst rattles global risk appetite",
+        "id": 7291038,
+        "image": "https://images.mktw.net/im-835676/social",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "U.S. stock futures fell early Tuesday after interest rate cuts by the People's Bank of China failed to salve investors' concerns about weakening activity in the world's second biggest economy.",
+        "url": "https://www.marketwatch.com/story/u-s-stock-futures-slide-as-china-growth-angst-rattles-global-risk-appetite-9d07f08c"
+    },
+    {
+        "category": "top news",
+        "datetime": 1692090120,
+        "headline": "Kelley Blue Book: Check out the new 2024 Chevy Blazer EV: photos, prices, range and tax credits",
+        "id": 7291039,
+        "image": "https://images.mktw.net/im-833371/horizontal",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "A few of Chevrolet's new electric Blazer SUV are out there, but if you're looking for the top-tier, high-performance SS trim, you'll have to wait a bit.",
+        "url": "https://www.marketwatch.com/story/check-out-the-new-2024-chevy-blazer-ev-photos-prices-range-and-tax-credits-5acfeaef"
+    },
+    {
+        "category": "top news",
+        "datetime": 1692090120,
+        "headline": "NerdWallet: The fastest-growing American cities are are also some of the places with the worst climate-change effects",
+        "id": 7291040,
+        "image": "https://images.mktw.net/im-834424/social",
+        "related": "",
+        "source": "MarketWatch",
+        "summary": "A new analysis finds that the majority of the fastest-growing places in the U.S. are also high-risk areas for natural hazards.",
+        "url": "https://www.marketwatch.com/story/the-fastest-growing-american-cities-are-are-also-some-of-the-places-with-the-worst-climate-change-effects-cefd0701"
+    },
+]
