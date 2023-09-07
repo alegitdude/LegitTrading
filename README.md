@@ -19,7 +19,7 @@
     An SPA full-stack financial data analysis dashboard. Uses D3 library for charts and MUI for components. Supbase for the POSTgres backend. Tanstack Query and Redux for state management.  
     <br />
     <br/>
-    <a href="https://legit-trading.onrender.com/">https://ducks-row.onrender.com/</a>
+    <a href="https://legit-trading.onrender.com/">https://legit-trading.onrender.com/</a>
     <br />
     <br />
     <a href="https://legit-trading.onrender.com/">View Demo</a>
