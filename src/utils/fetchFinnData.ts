@@ -1,7 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import * as _dayjs from "dayjs";
-import { isBetween } from "./isBetween";
-const dayjs = _dayjs;
+import dayjs from "dayjs";
 
 export const fetchQuote = async (symbol: string, apikey: string) => {
   try {
@@ -138,7 +136,12 @@ export const fetchCandles = async (
 
       if (res !== "D" && res !== "W" && res !== "M") {
         const fixedHours = sortedData.filter((candle) => {
-          return isBetween(candle.time);
+          const inputTime = dayjs(candle.time).unix();
+          const morningTime = dayjs(candle.time).hour(8).minute(29).unix();
+          const eveningTime = dayjs(candle.time).hour(15).minute(1).unix();
+          if (inputTime > morningTime && inputTime < eveningTime) {
+            return true;
+          } else return false;
         });
 
         sortedCandles = fixedHours.map((candle) => {
