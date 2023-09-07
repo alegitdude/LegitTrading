@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from "axios";
 import * as _dayjs from "dayjs";
 import isBetween from "dayjs/plugin/isBetween";
 const dayjs = _dayjs;
-dayjs.extend(isBetween);
+dayjs.extend(window.dayjs_plugin_isBetween);
 
 export const fetchQuote = async (symbol: string, apikey: string) => {
   try {
