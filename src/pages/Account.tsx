@@ -64,10 +64,9 @@ const Account = () => {
     setSuccessOpen(true);
   };
   return (
-    <Container sx={{ height: "100%" }}>
+    <Container sx={{ height: "100%", fontSize: "1rem" }}>
       <Paper
         sx={{
-          height: "100%",
           mt: "20px",
           backgroundColor: theme.palette.background.default,
         }}
@@ -83,41 +82,7 @@ const Account = () => {
               value={apiKey}
             />
           </Grid>
-          <Grid
-            item
-            sx={{
-              display: "flex",
-              height: "5rem",
-              alignItems: "center",
-              width: "100%",
-              mb: "2rem",
-            }}
-          >
-            <Typography variant="h4" sx={{ lineHeight: "20" }}>
-              Watchlist:
-            </Typography>
-            <Paper
-              sx={{
-                marginLeft: "1rem",
-                width: "100%",
-                height: "100%",
-                padding: "8px",
-              }}
-            >
-              <Grid>
-                {listItems.map((item: string) => {
-                  return (
-                    <Chip
-                      sx={{ mr: "4px", mb: "6px" }}
-                      key={nanoid()}
-                      label={item}
-                      onDelete={() => handleDelete(item)}
-                    />
-                  );
-                })}
-              </Grid>
-            </Paper>
-          </Grid>
+
           <Grid
             item
             sx={{
@@ -130,7 +95,7 @@ const Account = () => {
           >
             <Typography variant="h4">Market Overview Charts: </Typography>
 
-            <Grid ml={"1rem"} display={"flex"}>
+            <Grid ml={"1rem"} display={"flex"} flexWrap={"wrap"}>
               <Typography
                 variant="h6"
                 sx={{ mr: "1rem" }}
@@ -160,6 +125,41 @@ const Account = () => {
                 {marketChart4.symbol.toUpperCase()}
               </Typography>
             </Grid>
+          </Grid>
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              height: "5rem",
+              alignItems: "center",
+              width: "100%",
+              mb: "2rem",
+            }}
+          >
+            <Typography variant="h4" sx={{ lineHeight: "20" }}>
+              Watchlist:
+            </Typography>
+            <Paper
+              sx={{
+                marginLeft: "1rem",
+                width: "100%",
+
+                padding: "8px",
+              }}
+            >
+              <Grid>
+                {listItems.map((item: string) => {
+                  return (
+                    <Chip
+                      sx={{ mr: "4px", mb: "6px" }}
+                      key={nanoid()}
+                      label={item}
+                      onDelete={() => handleDelete(item)}
+                    />
+                  );
+                })}
+              </Grid>
+            </Paper>
           </Grid>
           <Grid item xs={12} sx={{ display: "flex", justifyContent: "center" }}>
             <Button disabled={isLoading} onClick={handleSave}>
