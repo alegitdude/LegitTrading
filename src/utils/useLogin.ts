@@ -18,7 +18,6 @@ export const useLogin = () => {
     onSuccess: (user) => {
       queryClient.setQueryData(["user"], user.user);
 
-      console.log(user);
       navigate("/dashboard/market", { replace: true });
     },
     onError: (err: Error) => {

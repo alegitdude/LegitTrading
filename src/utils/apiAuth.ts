@@ -14,7 +14,6 @@ export const signup = async ({ email, password, apikey }: SignupProps) => {
     );
   } catch (error: unknown) {
     if (error instanceof AxiosError) {
-      console.log(error?.response?.data.error);
       if (error.response?.data.error == "Invalid API key")
         throw new Error(error.response.data.error);
       return;
