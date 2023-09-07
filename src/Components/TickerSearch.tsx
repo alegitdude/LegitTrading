@@ -112,16 +112,6 @@ const TickerSearch = (props: Props) => {
                 setTicker(e.target.value);
                 setValue(e.target.value);
               }}
-              InputProps={{
-                ...params.InputProps,
-                type: "search",
-                style: {
-                  WebkitUserSelect: "text",
-                  MozUserSelect: "text",
-                  msUserSelect: "text",
-                  userSelect: "text",
-                },
-              }}
             />
           </FieldWrapper>
         )}
