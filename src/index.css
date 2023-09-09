@@ -12,4 +12,6 @@
   max-width: 1500px;
 }
 
-
+input {
+  -webkit-user-select: text;
+}

@@ -78,18 +78,6 @@ const TickerSearch = (props: Props) => {
     };
   }, [value, setTicker, apiKey]);
 
-  // const debounce = (changeValue:) => {
-  //   let timeoutID: number;
-  //   return (e) => {
-  //     setValue(e.target.value);
-  //     clearTimeout(timeoutID);
-  //     timeoutID = setTimeout(() => {
-  //     setValue(changeValue);
-  //     }, 1000);
-  //   };
-  // };
-
-  //   const optimizedDebounce = useMemo(() => debounce(), []);
   return (
     <Box sx={{ maxWidth: "200px" }}>
       <Autocomplete
@@ -107,6 +95,12 @@ const TickerSearch = (props: Props) => {
             <TextField
               {...params}
               value={value}
+              InputProps={{
+                style: {
+                  fontSize: 12,
+                  WebkitUserSelect: "text" /* Chrome, Opera, Safari */,
+                },
+              }}
               placeholder={`${initialTicker ? initialTicker : "Ticker"}`}
               onChange={(e) => {
                 setTicker(e.target.value);

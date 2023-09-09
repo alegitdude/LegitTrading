@@ -15,8 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { useEffect, useRef, useState } from "react";
 import { useTheme, styled } from "@mui/material/styles";
-import {fetchCandles} from "../utils/fetchFinnData";
-import {TimeResMenu, DateTimeMenu, TickerSearch} from './index'
+import { fetchCandles } from "../utils/fetchFinnData";
+import { TimeResMenu, DateTimeMenu, TickerSearch } from "./index";
 import ScienceIcon from "@mui/icons-material/Science";
 import * as Plot from "@observablehq/plot";
 import * as d3 from "d3";
@@ -109,7 +109,13 @@ const CandleChart = (props: Props) => {
     }
 
     const newRes = res.replace("m", "");
-    const someData = await fetchCandles(symbol, newRes, startDate, endDate, apiKey);
+    const someData = await fetchCandles(
+      symbol,
+      newRes,
+      startDate,
+      endDate,
+      apiKey
+    );
     if (someData === "Bad Inputs") {
       setBadInputs("Bad Inputs");
       setIsLoading(false);
