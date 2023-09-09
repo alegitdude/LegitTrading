@@ -109,7 +109,7 @@ const WatchListWidget = ({ ticker: propTicker }: Props) => {
     <Paper sx={{ width: "100%", position: "relative" }}>
       <Grid
         container
-        height={"110px"}
+        minHeight={"110px"}
         sx={{
           backgroundColor: theme.palette.background.default,
           border: `4px solid ${theme.palette.background.paper}`,
