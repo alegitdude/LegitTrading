@@ -78,6 +78,13 @@ const TickerSearch = (props: Props) => {
     };
   }, [value, setTicker, apiKey]);
 
+  const isMobileIos = () => {
+    if (window.navigator.userAgent.indexOf("iPhone") != -1) {
+      return 12;
+    } else return undefined;
+  };
+  const isIphone = isMobileIos();
+
   return (
     <Box sx={{ maxWidth: "200px" }}>
       <Autocomplete
@@ -92,21 +99,32 @@ const TickerSearch = (props: Props) => {
         }}
         renderInput={(params) => (
           <FieldWrapper>
-            <TextField
-              {...params}
-              value={value}
-              InputProps={{
-                style: {
-                  fontSize: 12,
-                  WebkitUserSelect: "text" /* Chrome, Opera, Safari */,
-                },
-              }}
-              placeholder={`${initialTicker ? initialTicker : "Ticker"}`}
-              onChange={(e) => {
-                setTicker(e.target.value);
-                setValue(e.target.value);
-              }}
-            />
+            {isIphone ? (
+              <TextField
+                {...params}
+                value={value}
+                InputProps={{
+                  style: {
+                    fontSize: 12,
+                  },
+                }}
+                placeholder={`${initialTicker ? initialTicker : "Ticker"}`}
+                onChange={(e) => {
+                  setTicker(e.target.value);
+                  setValue(e.target.value);
+                }}
+              />
+            ) : (
+              <TextField
+                {...params}
+                value={value}
+                placeholder={`${initialTicker ? initialTicker : "Ticker"}`}
+                onChange={(e) => {
+                  setTicker(e.target.value);
+                  setValue(e.target.value);
+                }}
+              />
+            )}
           </FieldWrapper>
         )}
       />
