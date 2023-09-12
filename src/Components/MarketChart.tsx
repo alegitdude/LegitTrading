@@ -176,6 +176,7 @@ const MarketChart = (props: Props) => {
       marginLeft: 40,
       marginRight: 40,
       marginTop: 24,
+      marginBottom: 8,
 
       x: {
         type: "band",
