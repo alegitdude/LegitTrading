@@ -100,7 +100,7 @@ const MarketChart = (props: Props) => {
       today,
       apiKey
     );
-    console.log(someData);
+
     if (!someData) {
       return;
     }

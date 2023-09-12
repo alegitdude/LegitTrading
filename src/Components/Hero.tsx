@@ -12,13 +12,16 @@ const Hero = () => {
   return (
     <Box
       mb="12rem"
+      marginLeft="auto"
+      marginRight="auto"
       sx={{
         height: "100vh",
-        width: "100vw",
+
         backgroundImage: `url("/Hero-candlestick-background.jpg")`,
-        // backgroundPosition: "left",
         backgroundRepeat: "no-repeat",
         backgroundSize: "100% 100%",
+        display: "flex",
+        justifyContent: "center",
       }}
     >
       <Grid
@@ -29,7 +32,6 @@ const Hero = () => {
         height="100%"
         width="100%"
         sx={{
-          //   backdropFilter: "blur(3px)",
           backgroundImage: `linear-gradient(to right, rgb(18,18,18,.8), rgb(18,18,18,.8)) `,
           backgroundSize: "100% 100%",
         }}
