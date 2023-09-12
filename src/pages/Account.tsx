@@ -34,7 +34,23 @@ const Account = () => {
     useSelector((store: RootState) => store.charts);
   const theme = useTheme();
   const dispatch = useDispatch();
-  const handleDelete = (item: string) => {
+
+  const handleDelete = async (item: string) => {
+    const newList = listItems.filter((oneItem) => {
+      return oneItem != item;
+    });
+    if (user) {
+      const { error } = await supabase
+        .from("profiles")
+        .update({ watchlist: newList })
+        .eq("id", user.id)
+        .select();
+      if (error) {
+        setMessage(error.message);
+        setErrorOpen(true);
+        return;
+      }
+    }
     dispatch(deleteTicker(item));
   };
 
@@ -78,6 +94,7 @@ const Account = () => {
               sx={{ ml: "1rem" }}
               id="outlined-basic"
               label="Key"
+              type="password"
               variant="outlined"
               value={apiKey}
             />
@@ -93,9 +110,17 @@ const Account = () => {
               mb: "2rem",
             }}
           >
-            <Typography variant="h4">Market Overview Charts: </Typography>
+            <Grid>
+              <Typography variant="h4">Market Overview Charts: </Typography>
+            </Grid>
 
-            <Grid ml={"1rem"} display={"flex"} flexWrap={"wrap"}>
+            <Grid
+              ml={"1rem"}
+              display={"flex"}
+              justifyContent={"center"}
+              flexWrap={"wrap"}
+              xs={6}
+            >
               <Typography
                 variant="h6"
                 sx={{ mr: "1rem" }}

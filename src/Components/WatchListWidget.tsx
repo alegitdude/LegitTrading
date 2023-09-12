@@ -1,10 +1,19 @@
-import { Typography, Paper, Avatar, Grid, IconButton } from "@mui/material";
+import {
+  Typography,
+  Paper,
+  Avatar,
+  Grid,
+  IconButton,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useDispatch } from "react-redux";
 import { deleteTicker } from "../Features/Watchlist/watchlistSlice";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { WatchListChart } from ".";
 import { useEffect, useState } from "react";
+import supabase from "../utils/supabase";
 import {
   fetchCompProf2,
   fetchCandles,
@@ -14,6 +23,7 @@ import dayjs from "dayjs";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { RootState } from "../store";
 import { getUserProfile } from "../utils/apiAuth";
+import useUser from "../utils/useUser";
 type Props = {
   ticker: string;
 };
@@ -54,14 +64,21 @@ interface iProfile {
 }
 
 const WatchListWidget = ({ ticker: propTicker }: Props) => {
-  const { apiKey } = useSelector((store: RootState) => store.watchlist);
+  const [errorMessage, setErrorMessage] = useState<string>();
+  const { apiKey, listItems } = useSelector(
+    (store: RootState) => store.watchlist
+  );
   const [quote, setQuote] = useState<iQuote>();
   const [compProf2, setCompProf2] = useState<iProfile>();
   const [candles, setCandles] = useState<Candles>([] as Candles);
+  const [errorOpen, setErrorOpen] = useState<boolean>(false);
+  const { user } = useUser();
   const dispatch = useDispatch();
   const theme = useTheme();
+
   let today = dayjs().unix();
   let yesterday = dayjs().subtract(1, "day").unix();
+
   if (dayjs(today * 1000).format("dd") == "Sa") {
     today = dayjs().hour(15).subtract(1, "day").unix();
     yesterday = dayjs().hour(15).subtract(2, "day").unix();
@@ -70,8 +87,31 @@ const WatchListWidget = ({ ticker: propTicker }: Props) => {
     today = dayjs().hour(15).subtract(2, "day").unix();
     yesterday = dayjs().hour(15).subtract(3, "day").unix();
   } else yesterday = dayjs().subtract(1, "day").unix();
-  const handleDelete = (propTicker: string) => {
+
+  const handleDelete = async (propTicker: string) => {
     dispatch(deleteTicker(propTicker));
+    console.log(listItems, propTicker);
+    const newList = listItems.filter((item) => {
+      return item != propTicker;
+    });
+    if (user) {
+      const { error } = await supabase
+        .from("profiles")
+        .update({ watchlist: newList })
+        .eq("id", user.id)
+        .select();
+      if (error) {
+        setErrorMessage(error.message);
+        setErrorOpen(true);
+        return;
+      }
+    }
+  };
+
+  const handleClose = () => {
+    setErrorOpen(false);
+
+    setErrorMessage("");
   };
 
   let currentPrice;
@@ -90,7 +130,13 @@ const WatchListWidget = ({ ticker: propTicker }: Props) => {
   const fetchItAll = async () => {
     const profile: iProfile = await fetchCompProf2(propTicker, apiKey);
     setCompProf2(profile);
-    const data = await fetchCandles(propTicker, "5", yesterday, today, apiKey);
+    const data = await fetchCandles(
+      propTicker.trim(),
+      "5",
+      yesterday,
+      today,
+      apiKey
+    );
     if (data && data[1]) {
       if (!data || data == "Bad Inputs") {
         return;
@@ -188,6 +234,14 @@ const WatchListWidget = ({ ticker: propTicker }: Props) => {
       >
         <DeleteForeverIcon sx={{ fontSize: "1rem" }} />
       </IconButton>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={4000}
+        open={errorOpen}
+        onClose={() => handleClose()}
+      >
+        <Alert severity={"error"}>{errorMessage}</Alert>
+      </Snackbar>
     </Paper>
   );
 };

@@ -16,19 +16,19 @@ import { useTheme } from "@mui/material/styles";
 type iReviews = Review[];
 const reviews: iReviews = [
   {
-    name: "Warren Buffet",
+    name: "Warren B.",
     avatar: "./Avatar3.jpg",
     rating: 5,
     testimonial: "Legit Trading changed my life forever",
   },
   {
-    name: "Ray Dalio",
+    name: "Ray D.",
     avatar: "./Avatar-1-Edit.jpg",
     rating: 5,
     testimonial: "I didn't know what trading was until Legit Trading",
   },
   {
-    name: "Bill Ackman",
+    name: "Bill A.",
     avatar: "./Avatar-2-Edit.jpg",
     rating: 5,
     testimonial:
@@ -55,9 +55,10 @@ const Testimonials = () => {
         Testimonials
       </Typography>
       <Carousel
-        stopAutoPlayOnHover={false}
+        stopAutoPlayOnHover={true}
         navButtonsAlwaysVisible={true}
-        autoPlay={false}
+        autoPlay={true}
+        interval={3000}
         fullHeightHover={false}
         sx={{ width: "100%" }}
         animation="slide"

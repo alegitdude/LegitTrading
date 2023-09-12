@@ -30,13 +30,13 @@ const ProfileChart = (props: Props) => {
   const theme = useTheme();
   const chartRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const yearAgo = dayjs().subtract(1, "year").add(1, "day");
+  const fiveDaysAgo = dayjs().subtract(5, "day");
   const [width, setWidth] = useState<number>();
   const [height, setHeight] = useState<number>();
   const today = dayjs();
-  const [startDate, setStartDate] = useState(dayjs(yearAgo).unix());
+  const [startDate, setStartDate] = useState(dayjs(fiveDaysAgo).unix());
   const [endDate, setEndDate] = useState(dayjs(today).unix());
-  const [res, setRes] = useState<string>("1m");
+  const [res, setRes] = useState<string>("60m");
   const [finnData, setFinnData] = useState<Candles>([] as Candles);
   const [badInputs, setBadInputs] = useState<boolean>(false);
 
@@ -133,8 +133,8 @@ const ProfileChart = (props: Props) => {
       width: svgWidth,
       height: height,
       grid: true,
-      marginLeft: 28,
-      marginRight: 5,
+      marginLeft: 36,
+      marginRight: 8,
       marginBottom: 90,
       marginTop: 24,
 
@@ -180,13 +180,14 @@ const ProfileChart = (props: Props) => {
           strokeLinecap: "round",
         }),
         Plot.crosshair(finnData, {
-          x: (d) => {
-            return dayjs(new Date(d.time));
+          x: (d: Candle) => {
+            return dayjs(d.time);
           },
           y: "close",
           textStrokeWidth: 12,
-          color: theme.palette.primary.main,
+          color: "white",
           ruleStroke: "white",
+          textStroke: theme.palette.background.default,
           textStrokeOpacity: 1,
           ruleStrokeWidth: 3,
         }),
@@ -217,6 +218,11 @@ const ProfileChart = (props: Props) => {
           height: "42px",
           paddingLeft: { xs: "1rem" },
           backgroundColor: theme.palette.background.paper,
+        }}
+        onKeyDown={(e) => {
+          if (e.code == "Enter") {
+            handleFetch();
+          } else return;
         }}
       >
         <Grid item>
@@ -251,7 +257,7 @@ const ProfileChart = (props: Props) => {
           }}
           onClick={handleFetch}
         >
-          Chart!
+          Update
         </Button>
       </Grid>
       <Box

@@ -11,7 +11,3 @@
   -webkit-text-size-adjust: 100%;
   max-width: 1500px;
 }
-
-input {
-  -webkit-user-select: text;
-}

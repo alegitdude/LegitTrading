@@ -63,15 +63,22 @@ const MarketChart = (props: Props) => {
   const [badInputs, setBadInputs] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  let today = dayjs().unix();
-  let threeDaysAgo = dayjs().subtract(3, "day").unix();
-  if (dayjs(today * 1000).format("dd") == "Sa") {
+  let today = dayjs().unix() * 1000;
+  let threeDaysAgo = dayjs().subtract(3, "day").unix() * 1000;
+  if (dayjs(today).format("dd") == "Sa") {
     today = dayjs().hour(15).subtract(1, "day").unix();
-    threeDaysAgo = dayjs().hour(15).subtract(4, "day").unix();
+    threeDaysAgo = dayjs().hour(8).subtract(4, "day").unix();
   }
-  if (dayjs(today * 1000).format("dd") == "Su") {
+  if (dayjs(today).format("dd") == "Su") {
     today = dayjs().hour(15).subtract(2, "day").unix();
-    threeDaysAgo = dayjs().hour(15).subtract(5, "day").unix();
+    threeDaysAgo = dayjs().hour(8).subtract(5, "day").unix();
+  }
+  if (
+    dayjs(today).format("dd") == "Mo" &&
+    Number(dayjs(today).format("H")) < 9
+  ) {
+    today = dayjs().hour(15).subtract(3, "day").unix();
+    threeDaysAgo = dayjs().hour(8).subtract(7, "day").unix();
   } else threeDaysAgo = dayjs().subtract(1, "day").unix();
 
   const dispatch = useDispatch();
@@ -87,13 +94,13 @@ const MarketChart = (props: Props) => {
 
     const newRes = "30";
     const someData = await fetchCandles(
-      symbol,
+      symbol.trim(),
       newRes,
       threeDaysAgo,
       today,
       apiKey
     );
-
+    console.log(someData);
     if (!someData) {
       return;
     }
@@ -129,6 +136,10 @@ const MarketChart = (props: Props) => {
   }, []);
 
   useEffect(() => {
+    if (finnData.length == 0) {
+      handleFetch();
+    }
+
     if (thisChart && thisChart.data) {
       setFinnData(thisChart.data);
     }
@@ -145,7 +156,7 @@ const MarketChart = (props: Props) => {
       frequency = 10;
     } else frequency = 5;
 
-    const times = finnData.map((d) => d.time);
+    const times = finnData.map((d) => dayjs(d.time));
     const newTimes = times.filter((_, i: number) => {
       return i == 0 || !(i % frequency);
     });
@@ -207,19 +218,16 @@ const MarketChart = (props: Props) => {
           strokeWidth: 4,
           strokeLinecap: "round",
         }),
-        Plot.crosshairX(finnData, {
-          x: "time",
-          y: "close",
-          textStrokeWidth: "2",
-        }),
+
         Plot.crosshair(finnData, {
-          x: (d) => {
-            return dayjs(new Date(d.time));
+          x: (d: Candle) => {
+            return dayjs(d.time);
           },
           y: "close",
           textStrokeWidth: 12,
-          color: theme.palette.primary.main,
+          color: "white",
           ruleStroke: "white",
+          textStroke: theme.palette.background.default,
           textStrokeOpacity: 1,
           ruleStrokeWidth: 3,
         }),
@@ -230,7 +238,7 @@ const MarketChart = (props: Props) => {
     }
 
     return () => plot.remove();
-  }, [height, width, finnData, thisChart, ticker, badInputs]);
+  }, [height, width, finnData, thisChart, ticker, badInputs, theme]);
 
   return (
     <Paper
@@ -252,6 +260,11 @@ const MarketChart = (props: Props) => {
           backgroundColor: theme.palette.background.paper,
           overflow: "hidden",
         }}
+        onKeyDown={(e) => {
+          if (e.code == "Enter") {
+            handleFetch();
+          } else return;
+        }}
       >
         <Grid item>
           <TickerSearch
@@ -272,7 +285,7 @@ const MarketChart = (props: Props) => {
           }}
           onClick={handleFetch}
         >
-          Fetch!
+          Update
         </Button>
       </Grid>
       <Box

@@ -4,13 +4,7 @@ import { Box, Autocomplete, TextField, Snackbar, Alert } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { RootState } from "../store";
-
-type Option = {
-  description: string;
-  displaySymbol: string;
-  symbol: string;
-  type: string;
-};
+import supabase from "../utils/supabase";
 
 type Props = {
   setTicker: (value: string) => void;
@@ -22,10 +16,7 @@ const TickerSearch = (props: Props) => {
   const [value, setValue] = useState<string>();
   const [error, setError] = useState<string>();
   const [open, setOpen] = useState<boolean>(false);
-  const [finnSearchOptions, setFinnSearchOptions] = useState([
-    "Loading..",
-    "Loading...",
-  ]);
+  const [finnSearchOptions, setFinnSearchOptions] = useState<string[]>([]);
 
   const handleClose = () => {
     setOpen(false);
@@ -35,20 +26,23 @@ const TickerSearch = (props: Props) => {
 
     const options = async () => {
       try {
-        const response = await axios.get(
-          `https://finnhub.io/api/v1//search?q=${value}&token=${apiKey}`,
-          { signal: controller.signal }
-        );
+        const { data, error } = await supabase
+          .from("Symbols")
+          .select()
+          .textSearch("title_description", `${value}`);
 
-        const searchOptions = response.data.result.map((option: Option) => {
-          return `${option.symbol} : ${option.description}`;
-        });
-        const newOptions = searchOptions.filter((option: string) => {
-          return option.indexOf(".") == -1;
-        });
-        setFinnSearchOptions(newOptions);
         if (value) {
           setTicker(value);
+        }
+        if (data) {
+          const options = data.map((option) => {
+            return `${option.Symbol} : ${option.Name}`;
+          });
+          setFinnSearchOptions(options);
+        }
+        if (error) {
+          setError(error.message);
+          setOpen(true);
         }
       } catch (error: unknown) {
         if (axios.isAxiosError(error)) {

@@ -68,7 +68,7 @@ export const logout = async () => {
 };
 
 export const getUserProfile = async () => {
-  const { data: profiles, error } = await supabase.from("profiles").select("*");
+  const { data: profiles, error } = await supabase.from("profiles").select(`*`);
   if (error) throw new Error(error.message);
 
   return profiles;

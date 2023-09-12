@@ -39,12 +39,13 @@ function Copyright() {
 export default function Signup() {
   const { signup, isLoading } = useSignup();
   const theme = useTheme();
-  const { register, formState, handleSubmit } = useForm<Props>();
+  const { register, formState, handleSubmit, reset } = useForm<Props>();
   const { errors } = formState;
   const [errorOpen, setErrorOpen] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
   const [successOpen, setSuccessOpen] = useState<boolean>(false);
   const [accountCreated, setAccountCreated] = useState<boolean>(false);
+
   const handleClose = () => {
     setErrorOpen(false);
     setSuccessOpen(false);
@@ -75,6 +76,7 @@ export default function Signup() {
         },
       }
     );
+    reset();
   };
 
   return (
@@ -90,9 +92,20 @@ export default function Signup() {
         <Avatar sx={{ m: 1, bgcolor: "secondary.main", color: "primary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography
+          textAlign={"center"}
+          component="h1"
+          variant="h5"
+          mb={"1rem"}
+        >
           Sign up
         </Typography>
+        <Grid item textAlign={"center"}>
+          <Typography component="h1" variant="h6">
+            A Finnhub API key is required for market data
+          </Typography>
+        </Grid>
+
         <Box component="form" onSubmit={handleSubmit(onSubmit)} sx={{ mt: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
@@ -107,7 +120,6 @@ export default function Signup() {
                 id="email"
                 label="Email Address"
                 autoComplete="email"
-                // disabled={isLoading}
                 {...register("email", {
                   required: "This field is required",
                   pattern: {
@@ -130,6 +142,7 @@ export default function Signup() {
                 id="password"
                 error={!!errors?.password?.message}
                 label="Password"
+                type="password"
                 autoComplete="new-password"
                 {...register("password", {
                   required: "This field is required",
@@ -145,6 +158,9 @@ export default function Signup() {
                 disabled={isLoading || accountCreated}
                 required
                 fullWidth
+                sx={{
+                  "#email-label": { fontSize: "280px" },
+                }}
                 label="Finnhub API Key"
                 type="text"
                 id="apikey"
@@ -173,7 +189,7 @@ export default function Signup() {
                     color="primary"
                   />
                 }
-                label="I want to receive viruses via email."
+                label="I want to receive emails about new updates/features."
               />
             </Grid>
           </Grid>
@@ -209,7 +225,7 @@ export default function Signup() {
       <Copyright />
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        autoHideDuration={3000}
+        autoHideDuration={4000}
         open={errorOpen}
         onClose={() => handleClose()}
       >
@@ -217,11 +233,12 @@ export default function Signup() {
       </Snackbar>
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        autoHideDuration={3000}
         open={successOpen}
         onClose={() => handleClose()}
       >
-        <Alert severity={"success"}>{message}</Alert>
+        <Alert severity={"success"}>
+          <Typography variant="h5">{message}</Typography>
+        </Alert>
       </Snackbar>
     </Container>
   );

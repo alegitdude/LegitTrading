@@ -14,10 +14,11 @@ const Hero = () => {
       mb="12rem"
       sx={{
         height: "100vh",
+        width: "100vw",
         backgroundImage: `url("/Hero-candlestick-background.jpg")`,
-        backgroundPosition: "left",
+        // backgroundPosition: "left",
         backgroundRepeat: "no-repeat",
-        backgroundSize: "cover",
+        backgroundSize: "100% 100%",
       }}
     >
       <Grid
@@ -30,7 +31,7 @@ const Hero = () => {
         sx={{
           //   backdropFilter: "blur(3px)",
           backgroundImage: `linear-gradient(to right, rgb(18,18,18,.8), rgb(18,18,18,.8)) `,
-          backgroundSize: "cover",
+          backgroundSize: "100% 100%",
         }}
       >
         <Container sx={{ textAlign: "center" }}>
@@ -40,6 +41,7 @@ const Hero = () => {
           <Typography marginBottom={"1rem"} variant="h6">
             Giving you the tools to make smart decisions in all things trading
           </Typography>
+
           <Typography>
             Try it out for free!
             <Button

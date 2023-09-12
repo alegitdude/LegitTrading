@@ -21,6 +21,7 @@ import { useLogout } from "../utils/useLogout";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "@mui/material/styles";
 import Logo from "../assets/logo-no-background (2).png";
+import { RootState } from "../store";
 import {
   Language,
   SsidChart,
@@ -31,8 +32,9 @@ import {
 import { nanoid } from "nanoid";
 import { useState, useEffect } from "react";
 import { useUser } from "../utils/useUser";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setApiKey } from "../Features/Watchlist/watchlistSlice";
+
 import { useGetProfile } from "../utils/useGetProfile";
 const drawerWidth = 140;
 
@@ -68,6 +70,7 @@ interface Props {
 
 const DashNav = (props: Props) => {
   const { getProfile, isLoading: profileLoading } = useGetProfile();
+  const { listItems } = useSelector((store: RootState) => store.watchlist);
   const { outlet } = props;
   const theme = useTheme();
   const [active, setActive] = useState<string>(
@@ -89,7 +92,7 @@ const DashNav = (props: Props) => {
 
   useEffect(() => {
     getProfile();
-  }, []);
+  }, [listItems]);
 
   return (
     <Box
@@ -113,7 +116,12 @@ const DashNav = (props: Props) => {
         <Toolbar>
           <Grid container>
             <Grid item xs={9}>
-              <Typography variant="h6" noWrap component="div">
+              <Typography
+                onClick={() => navigate("/dashboard/market")}
+                variant="h6"
+                noWrap
+                component="div"
+              >
                 <img src={Logo} style={{ width: "15rem", marginTop: "8px" }} />
               </Typography>
             </Grid>

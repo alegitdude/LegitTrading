@@ -78,7 +78,13 @@ const CompanyProfile = () => {
   };
 
   return (
-    <Box>
+    <Box
+      onKeyDown={(e) => {
+        if (e.code == "Enter") {
+          handleFetch();
+        } else return;
+      }}
+    >
       <Toolbar
         sx={{
           display: "flex",
@@ -99,7 +105,7 @@ const CompanyProfile = () => {
           }}
           onClick={handleFetch}
         >
-          Fetch!
+          Update
         </Button>
       </Toolbar>
       <Grid container sx={{ height: "300px" }}>

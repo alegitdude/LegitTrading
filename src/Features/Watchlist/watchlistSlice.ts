@@ -7,7 +7,8 @@ if (typeof profile == "string") {
 }
 
 let list = ["aapl"];
-if (profile && profile[0].watchlist) {
+
+if (profile[0] && profile[0].watchlist) {
   list = profile[0].watchlist;
 }
 const initialState = {

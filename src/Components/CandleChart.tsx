@@ -9,6 +9,8 @@ import {
   MenuItem,
   CircularProgress,
   Backdrop,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
@@ -51,13 +53,14 @@ const CandleChart = (props: Props) => {
   const theme = useTheme();
   const chartRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const yearAgo = dayjs().subtract(1, "year");
+  const fiveDaysAgo = dayjs().subtract(5, "days");
   const [width, setWidth] = useState<number>(100);
   const [height, setHeight] = useState<number>(100);
   const [ticker, setTicker] = useState<string>(thisChart?.symbol || "");
   const today = dayjs();
-
-  const [startDate, setStartDate] = useState(dayjs(yearAgo).unix());
+  const [errorOpen, setErrorOpen] = useState<boolean>();
+  const [message, setMessage] = useState<string>();
+  const [startDate, setStartDate] = useState(dayjs(fiveDaysAgo).unix());
   const [endDate, setEndDate] = useState(dayjs(today).unix());
   const [res, setRes] = useState<string>("1m");
   const [finnData, setFinnData] = useState<Candles | undefined>(
@@ -99,7 +102,18 @@ const CandleChart = (props: Props) => {
     setMenuAnchorEl(null);
   };
 
+  const handleAlertClose = () => {
+    setErrorOpen(false);
+    setMessage("");
+  };
+
   const handleFetch = async () => {
+    if (ticker.length == 0) {
+      setMessage("No Ticker!");
+      setErrorOpen(true);
+      return;
+    }
+
     setIsLoading(true);
 
     let symbol;
@@ -234,13 +248,14 @@ const CandleChart = (props: Props) => {
           strokeLinecap: "round",
         }),
         Plot.crosshair(finnData, {
-          x: (d) => {
-            return dayjs(new Date(d.time));
+          x: (d: Candle) => {
+            return dayjs(d.time);
           },
           y: "close",
           textStrokeWidth: 12,
-          color: theme.palette.primary.main,
+          color: "white",
           ruleStroke: "white",
+          textStroke: theme.palette.background.default,
           textStrokeOpacity: 1,
           ruleStrokeWidth: 3,
         }),
@@ -270,6 +285,11 @@ const CandleChart = (props: Props) => {
           height: "4rem",
           paddingLeft: { xs: "1rem", sm: "2rem" },
           backgroundColor: theme.palette.background.paper,
+        }}
+        onKeyDown={(e) => {
+          if (e.code == "Enter") {
+            handleFetch();
+          } else return;
         }}
       >
         <Grid item>
@@ -350,7 +370,7 @@ const CandleChart = (props: Props) => {
           }}
           onClick={handleFetch}
         >
-          Fetch!
+          Update
         </Button>
       </Grid>
       <Box
@@ -385,6 +405,14 @@ const CandleChart = (props: Props) => {
           />
         )}
       </Box>
+      <Snackbar
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        autoHideDuration={4000}
+        open={errorOpen}
+        onClose={() => handleAlertClose()}
+      >
+        <Alert severity={"error"}>{message}</Alert>
+      </Snackbar>
     </Paper>
   );
 };

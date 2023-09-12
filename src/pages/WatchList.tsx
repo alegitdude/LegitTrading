@@ -8,12 +8,14 @@ import {
   Snackbar,
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
+import supabase from "../utils/supabase";
 import { addTicker } from "../Features/Watchlist/watchlistSlice";
 import WatchListWidget from "../Components/WatchListWidget";
 import { useTheme } from "@mui/material/styles";
 import AddIcon from "@mui/icons-material/Add";
 import { useState } from "react";
 import { RootState } from "../store";
+import useUser from "../utils/useUser";
 import TickerSearch from "../Components/TickerSearch";
 
 const WatchList = () => {
@@ -23,6 +25,7 @@ const WatchList = () => {
   const theme = useTheme();
   const { listItems } = useSelector((store: RootState) => store.watchlist);
   const dispatch = useDispatch();
+  const { user } = useUser();
 
   const handleClick = () => {
     let symbol;
@@ -30,7 +33,8 @@ const WatchList = () => {
     if (ticker.indexOf(":") !== -1) {
       symbol = ticker.substring(0, ticker.indexOf(":"));
     }
-    const contains = listItems?.includes(symbol);
+    const contains = listItems?.includes(`${symbol.toLowerCase().trim()}`);
+
     if (contains) {
       setOpen(true);
       setErrorMessage("Symbol already in watchlist!");
@@ -42,8 +46,23 @@ const WatchList = () => {
       return;
     }
     dispatch(addTicker(symbol.toLowerCase().trim()));
+    handleSave(symbol);
   };
 
+  const handleSave = async (symbol: string) => {
+    if (user) {
+      const { error } = await supabase
+        .from("profiles")
+        .update({ watchlist: [...listItems, symbol] })
+        .eq("id", user.id)
+        .select();
+      if (error) {
+        setErrorMessage(error.message);
+        setOpen(true);
+        return;
+      }
+    }
+  };
   const handleClose = () => {
     setOpen(false);
   };
@@ -85,6 +104,11 @@ const WatchList = () => {
           marginTop: "2rem",
           marginBottom: "3rem",
           backgroundColor: theme.palette.background.default,
+        }}
+        onKeyDown={(e) => {
+          if (e.code == "Enter") {
+            handleClick();
+          } else return;
         }}
       >
         <Paper sx={{ width: { sm: "200px", xs: "100px" } }}>
