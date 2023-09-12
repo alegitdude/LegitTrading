@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
+let potentialProfile;
 let profile;
-
-profile = localStorage.getItem("profile");
-if (typeof profile == "string") {
-  profile = JSON.parse(profile);
+potentialProfile = localStorage.getItem("profile");
+if (typeof potentialProfile == "string") {
+  profile = JSON.parse(potentialProfile);
 }
-
+if (potentialProfile !== null) {
+  profile = potentialProfile;
+}
 let list = ["aapl"];
 
 if (profile !== null && profile[0] && profile[0].watchlist) {
