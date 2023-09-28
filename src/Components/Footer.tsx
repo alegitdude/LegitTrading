@@ -5,7 +5,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary">
       {"Copyright © "}
-      <Link color="inherit" href="https://legittrading.onrender.com">
+      <Link color="inherit" href="https://legit-trading.onrender.com">
         Legit Trading
       </Link>
       &nbsp;
