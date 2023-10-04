@@ -16,7 +16,7 @@
 <h3 align="center">LegitTrading</h3>
 
   <p align="center">
-    An SPA full-stack financial data analysis dashboard. Uses D3 library for charts and MUI for components. Supbase for the POSTgres backend. Tanstack Query and Redux for state management.  
+    An SPA full-stack financial data analysis dashboard. Uses D3 library for charts and MUI for components. Supabase for a PostgreSQL backend. Tanstack Query and Redux for state management.  
     <br />
     <br/>
     <a href="https://legit-trading.onrender.com/">https://legit-trading.onrender.com/</a>
