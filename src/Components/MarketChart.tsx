@@ -35,7 +35,7 @@ type Props = {
 
 const MarketChart = (props: Props) => {
   const { chart } = props;
-  const { apiKey } = useSelector((store: RootState) => store.watchlist);
+  // const { apiKey } = useSelector((store: RootState) => store.watchlist);
   const thisChart = useSelector((store: RootState) => {
     if (chart == "marketChart1") {
       return store.charts.marketChart1;
@@ -97,8 +97,7 @@ const MarketChart = (props: Props) => {
       symbol.trim(),
       newRes,
       threeDaysAgo,
-      today,
-      apiKey
+      today
     );
 
     if (!someData) {

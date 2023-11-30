@@ -90,8 +90,8 @@ export const fetchCandles = async (
   symbol: string,
   res: string,
   from: number,
-  to: number,
-  apikey: string
+  to: number
+  // apikey: string
 ) => {
   const controller = new AbortController();
   let response: AxiosResponse;

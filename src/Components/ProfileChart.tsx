@@ -26,7 +26,7 @@ type Candle = {
 type Candles = Candle[];
 
 const ProfileChart = (props: Props) => {
-  const { apiKey } = useSelector((store: RootState) => store.watchlist);
+  // const { apiKey } = useSelector((store: RootState) => store.watchlist);
   const theme = useTheme();
   const chartRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -61,13 +61,7 @@ const ProfileChart = (props: Props) => {
       }
       setBadInputs(false);
       const newRes = res.replace("m", "");
-      const someData = await fetchCandles(
-        symbol,
-        newRes,
-        startDate,
-        endDate,
-        apiKey
-      );
+      const someData = await fetchCandles(symbol, newRes, startDate, endDate);
       if (someData == "Bad Inputs" || !someData) {
         setBadInputs(true);
         return;

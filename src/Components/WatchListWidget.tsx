@@ -130,13 +130,7 @@ const WatchListWidget = ({ ticker: propTicker }: Props) => {
   const fetchItAll = async () => {
     const profile: iProfile = await fetchCompProf2(propTicker, apiKey);
     setCompProf2(profile);
-    const data = await fetchCandles(
-      propTicker.trim(),
-      "5",
-      yesterday,
-      today,
-      apiKey
-    );
+    const data = await fetchCandles(propTicker.trim(), "5", yesterday, today);
     if (data && data[1]) {
       if (!data || data == "Bad Inputs") {
         return;

@@ -39,7 +39,7 @@ type Props = {
 };
 
 const CandleChart = (props: Props) => {
-  const { apiKey } = useSelector((store: RootState) => store.watchlist);
+  // const { apiKey } = useSelector((store: RootState) => store.watchlist);
   const { chart } = props;
   const thisChart = useSelector((store: RootState) => {
     if (chart == "chartsChart1") {
@@ -123,13 +123,7 @@ const CandleChart = (props: Props) => {
     }
 
     const newRes = res.replace("m", "");
-    const someData = await fetchCandles(
-      symbol,
-      newRes,
-      startDate,
-      endDate,
-      apiKey
-    );
+    const someData = await fetchCandles(symbol, newRes, startDate, endDate);
     if (someData === "Bad Inputs") {
       setBadInputs("Bad Inputs");
       setIsLoading(false);
