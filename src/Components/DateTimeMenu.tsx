@@ -1,7 +1,7 @@
 import { useState } from "react";
 import dayjs from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider, DateTimePicker } from "@mui/x-date-pickers/";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers/";
 import HistoryIcon from "@mui/icons-material/History";
 import { MenuItem, Box, Button, Menu } from "@mui/material/";
 import { useTheme } from "@mui/material/styles";
@@ -77,14 +77,14 @@ export default function DateTimeMenu(props: Props) {
           }}
         >
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DateTimePicker
+            <DatePicker
               sx={{
                 minWidth: "0rem",
                 width: "12rem",
               }}
-              minDateTime={yearAgo}
+              minDate={yearAgo}
               shouldDisableDate={disableWeekends}
-              maxDateTime={dayjs(endDate * 1000).subtract(1, "minute")}
+              maxDate={dayjs(endDate * 1000).subtract(1, "minute")}
               value={dayjs(startDate * 1000)}
               onAccept={(newValue) => {
                 const start = dayjs(newValue).unix();
@@ -96,20 +96,22 @@ export default function DateTimeMenu(props: Props) {
               }}
             />
             &nbsp; - &nbsp;
-            <DateTimePicker
+            <DatePicker
               sx={{
                 minWidth: "0rem",
                 width: "12rem",
               }}
               shouldDisableDate={disableWeekends}
-              minDateTime={dayjs(startDate).add(1, "minute")}
-              maxDateTime={today}
+              minDate={dayjs(startDate).add(1, "minute")}
+              maxDate={today}
               value={dayjs(endDate * 1000)}
               onAccept={(newValue) => {
+                console.log(endDate);
                 const end = dayjs(newValue).unix();
                 setEndDate(end);
               }}
               onChange={(newValue) => {
+                console.log(newValue);
                 const end = dayjs(newValue).unix();
                 setTempEndTime(end);
               }}

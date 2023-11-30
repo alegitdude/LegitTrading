@@ -176,7 +176,7 @@ const MarketChart = (props: Props) => {
       marginLeft: 40,
       marginRight: 40,
       marginTop: 24,
-      marginBottom: 8,
+      marginBottom: 24,
 
       x: {
         type: "band",
@@ -192,7 +192,7 @@ const MarketChart = (props: Props) => {
           ? `${thisChart.symbol.toUpperCase()} 30m ${dayjs(
               Number(thisChart.startDate) * 1000
             ).format("M-D-YY h:mma")} to ${dayjs(
-              Number(thisChart.endDate) * 1000
+              Number(thisChart.endDate)
             ).format("M-D-YY h:mma")} `
           : null,
         labelArrow: "none",
@@ -292,7 +292,7 @@ const MarketChart = (props: Props) => {
       <Box
         ref={containerRef}
         overflow={"hidden"}
-        height="calc(100% - 50px)"
+        height="calc(100% - 55px)"
         maxWidth="100%"
       >
         <Backdrop

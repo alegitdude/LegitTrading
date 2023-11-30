@@ -139,6 +139,7 @@ const CandleChart = (props: Props) => {
       setIsLoading(false);
       return;
     }
+    console.log(someData);
     dispatch(changeChartData(chart, symbol, res, startDate, endDate, someData));
     setIsLoading(false);
   };
@@ -202,7 +203,7 @@ const CandleChart = (props: Props) => {
       height: height,
       grid: true,
       marginLeft: 34,
-      marginRight: 5,
+      marginRight: 32,
       marginBottom: 40,
       marginTop: 30,
 
@@ -376,7 +377,7 @@ const CandleChart = (props: Props) => {
       <Box
         ref={containerRef}
         sx={{ overflowY: "hidden" }}
-        height="calc(100% - 62px)"
+        height="calc(100% - 64px)"
         maxWidth="100%"
       >
         <Backdrop

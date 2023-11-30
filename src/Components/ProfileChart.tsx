@@ -134,8 +134,8 @@ const ProfileChart = (props: Props) => {
       height: height,
       grid: true,
       marginLeft: 36,
-      marginRight: 8,
-      marginBottom: 90,
+      marginRight: 24,
+      marginBottom: 100,
       marginTop: 24,
 
       x: {
