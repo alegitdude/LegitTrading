@@ -10,7 +10,7 @@
 <br />
 <div align="center">
   <a href="https://legit-trading.onrender.com/">
-    <img src="/client/public/android-chrome-192x192.png" alt="Logo" width="80" height="80">
+    <img src="https://legit-trading.onrender.com/assets/logo-no-background%20(2)-9dd7d3ed.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">LegitTrading</h3>
